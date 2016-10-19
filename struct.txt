@@ -1,0 +1,7 @@
+typedef struct Student
+{
+	char id[30];
+	char name[30];
+	int age;
+}Student;
+

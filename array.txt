@@ -1,0 +1,59 @@
+#ifndef _IDENMSG_H_
+#define _IDENMSG_H_
+#include "domian.h"
+#include <stdio.h>
+#include <string.h>
+
+
+int get<ClassName>Size(<ClassName> <ClassNameLows>[])
+{
+	int i = 0;
+	while (strlen(<ClassNameLows>[i].id) != 0)
+	{
+		i++;
+	}
+	return i;
+}
+
+int read<ClassName>(char* filename, <ClassName> <ClassNameLows>[])
+{
+	FILE* f = fopen(filename, "r");
+	int i;
+	for (i = 0; fscanf(f, "%s %s\n", <ClassNameLows>[i].name, <ClassNameLows>[i].password) != EOF; i++);
+	fclose(f);
+	strcpy(<ClassNameLows>[i].name, "");
+	return i;
+}
+
+void write<ClassName>(char* filename, <ClassName> <ClassNameLows>[])
+{
+	FILE* f = fopen(filename, "w");
+	int i = 0;
+	while (strlen(<ClassNameLows>[i].name)!=0)
+	{
+		fprintf(f, "%s %s\n", <ClassNameLows>[i].name, <ClassNameLows>[i].password);
+		i++;
+	}
+	fclose(f);
+}
+
+void delete<ClassName>(<ClassName> <ClassNameLows>[],int index)
+{
+	int size = get<ClassName>Size(<ClassNameLows>);
+	if (index>=size)
+	{
+		return;
+	}
+	for (int i = index; i < size - 1; i++)
+	{
+		<ClassNameLows>[i] = <ClassNameLows>[i + 1];
+	}
+	strcpy(<ClassNameLows>[size - 1].id, "");
+}
+
+void add<ClassName>(<ClassName> <ClassNameLows>[], <ClassName> toadd)
+{
+	int s = get<ClassName>Size(<ClassNameLows>);
+	<ClassNameLows>[s] = toadd;
+	strcpy(<ClassNameLows>[s+1].id, "");
+}

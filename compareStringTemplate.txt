@@ -1,0 +1,5 @@
+int compare_<ClassName>_<dataName>(const void* p1,const void* p2){
+	<ClassName>* c1 = (<ClassName>*) p1;
+	<ClassName>* c2 = (<ClassName>*) p2;
+	return strcmp(c1-><dataName> , c2-><dataName>);
+}

@@ -1,0 +1,7 @@
+void add<ClassName>(<ClassName> <ClassNameLows>[])
+{
+	int s = get<ClassName>Size(<ClassNameLows>);
+	<ClassName> <ClassNameLow> = <ClassNameLows>[s];
+	<input>
+	strcpy(<ClassNameLows>[s+1].id, "");
+}

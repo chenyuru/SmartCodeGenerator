@@ -1,0 +1,4 @@
+void sort<ClassName>By<dataName>(<ClassName> <ClassNameLows>[])
+{
+	qsort(<ClassNameLows>,get<ClassName>Size(<ClassNameLows>),sizeof(<ClassName>),compare_<ClassName>_<dataName>);
+}

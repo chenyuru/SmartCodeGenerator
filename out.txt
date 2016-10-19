@@ -1,0 +1,186 @@
+#ifndef _IDENMSG_H_
+#define _IDENMSG_H_
+#include "domian.h"
+#include <stdio.h>
+#include <string.h>
+
+
+int getStudentSize(Student students[])
+{
+	int i = 0;
+	while (strlen(students[i].id) != 0)
+	{
+		i++;
+	}
+	return i;
+}
+
+int readStudent(char* filename, Student students[])
+{
+	FILE* f = fopen(filename, "r");
+	int i;
+	for (i = 0; fscanf(f, "%s %s\n", students[i].name, students[i].password) != EOF; i++);
+	fclose(f);
+	strcpy(students[i].name, "");
+	return i;
+}
+
+void writeStudent(char* filename, Student students[])
+{
+	FILE* f = fopen(filename, "w");
+	int i = 0;
+	while (strlen(students[i].name)!=0)
+	{
+		fprintf(f, "%s %s\n", students[i].name, students[i].password);
+		i++;
+	}
+	fclose(f);
+}
+
+void deleteStudent(Student students[],int index)
+{
+	int size = getStudentSize(students);
+	if (index>=size)
+	{
+		return;
+	}
+	for (int i = index; i < size - 1; i++)
+	{
+		students[i] = students[i + 1];
+	}
+	strcpy(students[size - 1].id, "");
+}
+
+void addStudent(Student students[], Student toadd)
+{
+	int s = getStudentSize(students);
+	students[s] = toadd;
+	strcpy(students[s+1].id, "");
+}
+int compare_Student_id(const void* p1,const void* p2){
+	Student* c1 = (Student*) p1;
+	Student* c2 = (Student*) p2;
+	return strcmp(c1->id , c2->id);
+}
+
+int findStudentByid(Student students[] ,char* id)
+{
+	int i=0;
+	int size = getStudentSize(students);
+	char id[30];
+printf("");
+scanf("%s",id);
+
+	for(i=0;i<size ;i++)
+	{
+		if(strcmp(students[i].id,id)==0)
+			return i;
+	}
+	return -1;
+}
+
+void sortStudentByid(Student students[])
+{
+	qsort(students,getStudentSize(students),sizeof(Student),compare_Student_id);
+}
+
+void addStudent(Student students[])
+{
+	int s = getStudentSize(students);
+	Student student = students[s];
+	printf("");
+scanf("%s",student.id);
+printf("");
+scanf("%s",student.name);
+printf("");
+scanf("%d",&student.age);
+
+	strcpy(students[s+1].id, "");
+}
+
+int compare_Student_name(const void* p1,const void* p2){
+	Student* c1 = (Student*) p1;
+	Student* c2 = (Student*) p2;
+	return strcmp(c1->name , c2->name);
+}
+
+int findStudentByname(Student students[] ,char* name)
+{
+	int i=0;
+	int size = getStudentSize(students);
+	char name[30];
+printf("");
+scanf("%s",name);
+
+	for(i=0;i<size ;i++)
+	{
+		if(strcmp(students[i].name,name)==0)
+			return i;
+	}
+	return -1;
+}
+
+void sortStudentByname(Student students[])
+{
+	qsort(students,getStudentSize(students),sizeof(Student),compare_Student_name);
+}
+
+void addStudent(Student students[])
+{
+	int s = getStudentSize(students);
+	Student student = students[s];
+	printf("");
+scanf("%s",student.id);
+printf("");
+scanf("%s",student.name);
+printf("");
+scanf("%d",&student.age);
+
+	strcpy(students[s+1].id, "");
+}
+
+int compare_Student_age(const void* p1,const void* p2){
+	Student* c1 = (Student*) p1;
+	Student* c2 = (Student*) p2;
+	if(c1->age == c2->age)
+		return 0;
+	if(c1->age > c2->age)
+		return 1;
+	return -1;
+}
+
+int findStudentByage(Student students[] ,int age)
+{
+	int i=0;
+	int size = getStudentSize(students);
+	int age;
+printf("");
+scanf("%d",&age);
+
+	for(i=0;i<size ;i++)
+	{
+		if(students[i].age==age)
+			return i;
+	}
+	return -1;
+}
+
+void sortStudentByage(Student students[])
+{
+	qsort(students,getStudentSize(students),sizeof(Student),compare_Student_age);
+}
+
+void addStudent(Student students[])
+{
+	int s = getStudentSize(students);
+	Student student = students[s];
+	printf("");
+	scanf("%s",student.id);
+	printf("");
+	scanf("%s",student.name);
+	printf("");
+	scanf("%d",&student.age);
+
+	strcpy(students[s+1].id, "");
+}
+
